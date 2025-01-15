@@ -7,15 +7,13 @@ const inter = Inter({
 });
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="ru">
-      <body className={inter.className}>
-        {children}
-      </body>
-    </html>
-  );
+	return (
+		<html lang="ru">
+			<body className={inter.className}>{children}</body>
+		</html>
+	);
 }
