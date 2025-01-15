@@ -1,6 +1,7 @@
 {
   "name": "kn",
   "version": "0.1.0",
+  "homepage": "https://mirogaz.github.io/kn/",
   "private": true,
   "scripts": {
     "dev": "next dev",
