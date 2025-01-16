@@ -34,9 +34,25 @@ export default function DataGridKn() {
 		{ field: "cadastralNumber", headerName: "КН", flex: 1, sortable: true },
 		{ field: "jurisdiction", headerName: "Подвед", flex: 1, minWidth: 200, sortable: true },
 		{ field: "type", headerName: "Тип", flex: 1, sortable: true },
-		{ field: "addressSource", headerName: "Адрес исходный", flex: 1, sortable: true },
+		{
+			field: "addressSource",
+			headerName: "Адрес исходный",
+			flex: 1,
+			sortable: true,
+			renderCell: (params) => (
+				<div dangerouslySetInnerHTML={{ __html: params.value.replace(/\r\n/g, "<br />") }} />
+			),
+		},
 		{ field: "addressNormalized", headerName: "Адрес нормализованный", flex: 1, sortable: true },
-		{ field: "yandexMark", headerName: "Метки яндекса", flex: 1, sortable: true },
+		{
+			field: "yandexMark",
+			headerName: "Метки яндекса",
+			flex: 1,
+			sortable: true,
+			renderCell: (params) => (
+				<div dangerouslySetInnerHTML={{ __html: params.value.replace(/\r\n/g, "<br />") }} />
+			),
+		},
 		{ field: "countYandexMark", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
 		{ field: "encumbrances", headerName: "Обременения по РФС АПК", flex: 1, sortable: true },
 		{ field: "countEncumbrances", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
