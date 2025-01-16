@@ -20,42 +20,39 @@ export default function DataGridKn() {
 		const searchLower = searchQuery.toLowerCase();
 
 		return (
-			row.podved.toLowerCase().includes(searchLower) ||
-			row.address.toLowerCase().includes(searchLower) ||
+			row.cadastralNumber.toLowerCase().includes(searchLower) ||
+			row.jurisdiction.toLowerCase().includes(searchLower) ||
 			row.type.toLowerCase().includes(searchLower) ||
-			row.kn.toLowerCase().includes(searchLower) ||
-			row.addressNorm.toLowerCase().includes(searchLower) ||
+			row.addressSource.toLowerCase().includes(searchLower) ||
+			row.addressNormalized.toLowerCase().includes(searchLower) ||
 			row.yandexMark.toLowerCase().includes(searchLower) ||
-			row.rentalInformation.toLowerCase().includes(searchLower) ||
-			row.sum1.toString().includes(searchLower) ||
-			row.sum2.toString().includes(searchLower)
+			row.encumbrances.toString().includes(searchLower)
 		);
 	});
 
 	const columns: GridColDef[] = [
-		{ field: "id", headerName: "№", flex: 1, maxWidth: 80, sortable: true },
-		{ field: "podved", headerName: "Подвед", flex: 1, minWidth: 200, sortable: true },
-		{ field: "address", headerName: "Адрес исходный", flex: 1, sortable: true },
+		{ field: "cadastralNumber", headerName: "КН", flex: 1, sortable: true },
+		{ field: "jurisdiction", headerName: "Подвед", flex: 1, minWidth: 200, sortable: true },
 		{ field: "type", headerName: "Тип", flex: 1, sortable: true },
-		{ field: "kn", headerName: "КН", flex: 1, sortable: true },
-		{ field: "addressNorm", headerName: "Адрес нормализованный", flex: 1, sortable: true },
-		{ field: "yandexMark", headerName: "Метки яндекса (100)", flex: 1, sortable: true },
-		{ field: "sum1", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
-		{ field: "rentalInformation", headerName: "Обременения по РФС АПК (73)", flex: 1, sortable: true },
-		{ field: "sum2", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
+		{ field: "addressSource", headerName: "Адрес исходный", flex: 1, sortable: true },
+		{ field: "addressNormalized", headerName: "Адрес нормализованный", flex: 1, sortable: true },
+		{ field: "yandexMark", headerName: "Метки яндекса", flex: 1, sortable: true },
+		{ field: "countYandexMark", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
+		{ field: "encumbrances", headerName: "Обременения по РФС АПК", flex: 1, sortable: true },
+		{ field: "countEncumbrances", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
 	];
 
-	const rows: GridRowsProp = data.map((row) => ({
-		id: row.id,
-		podved: row.podved,
-		address: row.address,
+	const rows: GridRowsProp = data.map((row, index) => ({
+		id: index,
+		cadastralNumber: row.cadastralNumber,
+		jurisdiction: row.jurisdiction,
 		type: row.type,
-		kn: row.kn,
-		addressNorm: row.addressNorm,
+		addressSource: row.addressSource,
+		addressNormalized: row.addressNormalized,
 		yandexMark: row.yandexMark,
-		sum1: row.sum1,
-		rentalInformation: row.rentalInformation,
-		sum2: row.sum2,
+		countYandexMark: row.countYandexMark,
+		encumbrances: row.encumbrances,
+		countEncumbrances: row.countEncumbrances,
 	}));
 
 	return (
@@ -113,17 +110,17 @@ export default function DataGridKn() {
 								</Typography>
 							) : (
 								<DataGrid
-									rows={filteredData.map((row) => ({
-										id: row.id,
-										podved: row.podved,
-										address: row.address,
+									rows={filteredData.map((row, index) => ({
+										id: index,
+										cadastralNumber: row.cadastralNumber,
+										jurisdiction: row.jurisdiction,
 										type: row.type,
-										kn: row.kn,
-										addressNorm: row.addressNorm,
+										addressSource: row.addressSource,
+										addressNormalized: row.addressNormalized,
 										yandexMark: row.yandexMark,
-										sum1: row.sum1,
-										rentalInformation: row.rentalInformation,
-										sum2: row.sum2,
+										countYandexMark: row.countYandexMark,
+										encumbrances: row.encumbrances,
+										countEncumbrances: row.countEncumbrances,
 									}))}
 									columns={columns}
 									initialState={{

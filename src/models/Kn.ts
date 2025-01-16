@@ -1,14 +1,11 @@
 export interface Kn {
-	id: number;
-	podved: string;
-	address: string;
+	cadastralNumber: string;
+	jurisdiction: string;
 	type: string;
-	kn: string;
-	addressNorm: string;
+	addressSource: string;
+	addressNormalized: string;
 	yandexMark: string;
-	sum1: number;
-	rentalInformation: string;
-	sum2: number;
+	countYandexMark: string;
 	encumbrances: string;
-	sum3: number;
+	countEncumbrances: string;
 }
