@@ -31,9 +31,9 @@ export default function DataGridKn() {
 	});
 
 	const columns: GridColDef[] = [
-		{ field: "cadastralNumber", headerName: "КН", flex: 1, sortable: true },
+		{ field: "cadastralNumber", headerName: "КН", flex: 1, sortable: true, maxWidth: 160 },
 		{ field: "jurisdiction", headerName: "Подвед", flex: 1, minWidth: 200, sortable: true },
-		{ field: "type", headerName: "Тип", flex: 1, sortable: true },
+		{ field: "type", headerName: "Тип", flex: 1, sortable: true, maxWidth: 140 },
 		{
 			field: "addressSource",
 			headerName: "Адрес исходный",
@@ -53,9 +53,9 @@ export default function DataGridKn() {
 				<div dangerouslySetInnerHTML={{ __html: params.value.replace(/\r\n/g, "<br />") }} />
 			),
 		},
-		{ field: "countYandexMark", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
-		{ field: "encumbrances", headerName: "Обременения по РФС АПК", flex: 1, sortable: true },
-		{ field: "countEncumbrances", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
+		{ field: "countYandexMark", headerName: "Σ", maxWidth: 60, flex: 1, sortable: true },
+		{ field: "encumbrances", headerName: "Обременения по РФС АПК", flex: 1, sortable: true, maxWidth: 260 },
+		{ field: "countEncumbrances", headerName: "Σ", maxWidth: 60, flex: 1, sortable: true },
 	];
 
 	const rows: GridRowsProp = data.map((row, index) => ({
