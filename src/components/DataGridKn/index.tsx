@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
+import {
+	DataGrid,
+	GridColDef,
+	GridRowsProp,
+	GridToolbar,
+	GridToolbarContainer,
+	GridToolbarExport,
+} from "@mui/x-data-grid";
 import { Kn } from "@/models/Kn";
 import knJson from "@/csvjson.json";
 import { Box, Tab, Tabs, TextField, Typography } from "@mui/material";
@@ -33,16 +40,16 @@ export default function DataGridKn() {
 	});
 
 	const columns: GridColDef[] = [
-		{ field: "id", headerName: "№", width: 90, sortable: true },
-		{ field: "podved", headerName: "Подвед", width: 180, sortable: true },
-		{ field: "address", headerName: "Адрес исходный", width: 200, sortable: true },
-		{ field: "type", headerName: "Тип", width: 120, sortable: true },
-		{ field: "kn", headerName: "КН", width: 150, sortable: true },
-		{ field: "addressNorm", headerName: "Адрес нормализованный", width: 250, sortable: true },
-		{ field: "yandexMark", headerName: "Метки яндекса (100)", width: 180, sortable: true },
-		{ field: "sum1", headerName: "Σ", width: 120, sortable: true },
-		{ field: "rentalInformation", headerName: "Обременения по РФС АПК (73)", width: 250, sortable: true },
-		{ field: "sum2", headerName: "Σ", width: 120, sortable: true },
+		{ field: "id", headerName: "№", flex: 1, maxWidth: 80, sortable: true },
+		{ field: "podved", headerName: "Подвед", flex: 1, minWidth: 200, sortable: true },
+		{ field: "address", headerName: "Адрес исходный", flex: 1, sortable: true },
+		{ field: "type", headerName: "Тип", flex: 1, sortable: true },
+		{ field: "kn", headerName: "КН", flex: 1, sortable: true },
+		{ field: "addressNorm", headerName: "Адрес нормализованный", flex: 1, sortable: true },
+		{ field: "yandexMark", headerName: "Метки яндекса (100)", flex: 1, sortable: true },
+		{ field: "sum1", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
+		{ field: "rentalInformation", headerName: "Обременения по РФС АПК (73)", flex: 1, sortable: true },
+		{ field: "sum2", headerName: "Σ", maxWidth: 40, flex: 1, sortable: true },
 	];
 
 	const rows: GridRowsProp = data.map((row) => ({
@@ -70,13 +77,24 @@ export default function DataGridKn() {
 			{tabIndex === 0 ? (
 				<>
 					<DataGrid
+						sx={{
+							height: "95vh",
+						}}
+						slots={{ toolbar: GridToolbar }}
 						rows={rows}
 						columns={columns}
+						rowHeight={100}
 						initialState={{
 							pagination: {
 								paginationModel: { pageSize: 30 },
 							},
 						}}
+						getRowHeight={() => "auto"}
+						autosizeOptions={{
+							includeOutliers: true,
+							includeHeaders: false,
+						}}
+						scrollbarSize={10}
 					/>
 				</>
 			) : (
@@ -92,7 +110,7 @@ export default function DataGridKn() {
 					{searchQuery && filteredData.length === 0 ? (
 						<Typography variant="h6">Нет данных, соответствующих запросу</Typography>
 					) : (
-						<div style={{ height: 400, width: "100%" }}>
+						<div style={{ height: 500, width: "100%" }}>
 							{filteredData.length === 0 || !searchQuery ? (
 								<Typography variant="h6" style={{ textAlign: "center", marginTop: "20px" }}>
 									Начните поиск
@@ -117,6 +135,12 @@ export default function DataGridKn() {
 											paginationModel: { pageSize: 30 },
 										},
 									}}
+									getRowHeight={() => "auto"}
+									autosizeOptions={{
+										includeOutliers: true,
+										includeHeaders: false,
+									}}
+									scrollbarSize={10}
 								/>
 							)}
 						</div>
