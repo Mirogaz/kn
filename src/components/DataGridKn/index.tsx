@@ -1,17 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-	DataGrid,
-	GridColDef,
-	GridRowsProp,
-	GridToolbar,
-	GridToolbarContainer,
-	GridToolbarExport,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowsProp, GridToolbar } from "@mui/x-data-grid";
 import { Kn } from "@/models/Kn";
 import knJson from "@/csvjson.json";
-import { Box, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { Box, Link, List, ListItem, ListItemText, Tab, Tabs, TextField, Typography } from "@mui/material";
 
 export default function DataGridKn() {
 	const [data, setData] = useState<Kn[]>(knJson);
@@ -71,10 +64,11 @@ export default function DataGridKn() {
 				<Tabs value={tabIndex} onChange={handleTabChange} aria-label="tabs example">
 					<Tab label="Все" />
 					<Tab label="Поиск" />
+					<Tab label="Справка по экспорту" />
 				</Tabs>
 			</Box>
 
-			{tabIndex === 0 ? (
+			{tabIndex === 0 && (
 				<>
 					<DataGrid
 						sx={{
@@ -97,7 +91,9 @@ export default function DataGridKn() {
 						scrollbarSize={10}
 					/>
 				</>
-			) : (
+			)}
+
+			{tabIndex === 1 && (
 				<div style={{ padding: 20, textAlign: "center" }}>
 					<TextField
 						label="Поиск"
@@ -110,7 +106,7 @@ export default function DataGridKn() {
 					{searchQuery && filteredData.length === 0 ? (
 						<Typography variant="h6">Нет данных, соответствующих запросу</Typography>
 					) : (
-						<div style={{ height: 500, width: "100%" }}>
+						<div style={{ height: "83vh", width: "100%" }}>
 							{filteredData.length === 0 || !searchQuery ? (
 								<Typography variant="h6" style={{ textAlign: "center", marginTop: "20px" }}>
 									Начните поиск
@@ -135,6 +131,7 @@ export default function DataGridKn() {
 											paginationModel: { pageSize: 30 },
 										},
 									}}
+									slots={{ toolbar: GridToolbar }}
 									getRowHeight={() => "auto"}
 									autosizeOptions={{
 										includeOutliers: true,
@@ -146,6 +143,45 @@ export default function DataGridKn() {
 						</div>
 					)}
 				</div>
+			)}
+
+			{tabIndex === 2 && (
+				<Box sx={{ backgroundColor: "#f9f9f9", border: "1px solid #ddd", borderRadius: 2, p: 2, mt: 2 }}>
+					<Typography variant="h6" gutterBottom>
+						Экспорт файлов происходит в формате CSV. Инструкция по открытию:
+					</Typography>
+					<List>
+						<ListItem>
+							<ListItemText primary="1. Открыть или создать новый файл в Excel, в меню выбрать Data - Get Data" />
+						</ListItem>
+						<ListItem>
+							<ListItemText primary="2. В разделе Get Data выбрать From Text" />
+						</ListItem>
+						<ListItem>
+							<ListItemText primary="3. Выбрать файл, который нужно открыть в Excel, и нажать Get Data" />
+						</ListItem>
+						<ListItem>
+							<ListItemText primary="4. На этом шаге выбрать Delimited и File origin: Unicode (UTF-8), затем нажать Next" />
+						</ListItem>
+						<ListItem>
+							<ListItemText primary="5. На втором шаге отметить Comma и нажать Next" />
+						</ListItem>
+						<ListItem>
+							<ListItemText primary="6. Выбрать желаемый формат данных и нажать Finish" />
+						</ListItem>
+					</List>
+					<Typography variant="body1">
+						или перейдите в&nbsp;
+						<Link
+							href="https://workspace.google.com/products/sheets/"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Google Sheets
+						</Link>
+						&nbsp; и загрузите файл
+					</Typography>
+				</Box>
 			)}
 		</div>
 	);
