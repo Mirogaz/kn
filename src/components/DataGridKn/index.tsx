@@ -5,6 +5,7 @@ import { DataGrid, GridColDef, GridRowsProp, GridToolbar } from "@mui/x-data-gri
 import { Kn } from "@/models/Kn";
 import knJson from "@/csvjson.json";
 import { Box, Link, List, ListItem, ListItemText, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { ruRU } from "@mui/x-data-grid/locales";
 
 export default function DataGridKn() {
 	const [data, setData] = useState<Kn[]>(knJson);
@@ -75,38 +76,13 @@ export default function DataGridKn() {
 		<div style={{ width: "100%" }}>
 			<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
 				<Tabs value={tabIndex} onChange={handleTabChange} aria-label="tabs example">
-					<Tab label="Все" />
 					<Tab label="Поиск" />
+					<Tab label="Все" />
 					<Tab label="Справка по экспорту" />
 				</Tabs>
 			</Box>
 
 			{tabIndex === 0 && (
-				<>
-					<DataGrid
-						sx={{
-							height: "95vh",
-						}}
-						slots={{ toolbar: GridToolbar }}
-						rows={rows}
-						columns={columns}
-						rowHeight={100}
-						initialState={{
-							pagination: {
-								paginationModel: { pageSize: 30 },
-							},
-						}}
-						getRowHeight={() => "auto"}
-						autosizeOptions={{
-							includeOutliers: true,
-							includeHeaders: false,
-						}}
-						scrollbarSize={10}
-					/>
-				</>
-			)}
-
-			{tabIndex === 1 && (
 				<div style={{ padding: 20, textAlign: "center" }}>
 					<TextField
 						label="Поиск"
@@ -126,6 +102,7 @@ export default function DataGridKn() {
 								</Typography>
 							) : (
 								<DataGrid
+									localeText={ruRU.components.MuiDataGrid.defaultProps?.localeText}
 									rows={filteredData.map((row, index) => ({
 										id: index,
 										cadastralNumber: row.cadastralNumber,
@@ -156,6 +133,32 @@ export default function DataGridKn() {
 						</div>
 					)}
 				</div>
+			)}
+
+			{tabIndex === 1 && (
+				<>
+					<DataGrid
+						localeText={ruRU.components.MuiDataGrid.defaultProps?.localeText}
+						sx={{
+							height: "95vh",
+						}}
+						slots={{ toolbar: GridToolbar }}
+						rows={rows}
+						columns={columns}
+						rowHeight={100}
+						initialState={{
+							pagination: {
+								paginationModel: { pageSize: 30 },
+							},
+						}}
+						getRowHeight={() => "auto"}
+						autosizeOptions={{
+							includeOutliers: true,
+							includeHeaders: false,
+						}}
+						scrollbarSize={10}
+					/>
+				</>
 			)}
 
 			{tabIndex === 2 && (
