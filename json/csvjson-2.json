@@ -1,0 +1,57 @@
+[
+	{
+		"cadastralNumber": "01:01:0500152:104",
+		"jurisdiction": "ФГБУ \"Россельхозцентр\"",
+		"type": "Здание",
+		"addressSource": "Респ. Адыгея, Гиагинский р-н., ст-ца. Гиагинская, ул. Красная, д. 264",
+		"addressNormalized": "Красная ул., 266И, станица Гиагинская",
+		"yandexMark": "Сот@-Сервис Наблюдатель\r\n\r\nСемейный стиль\r\n\r\nАптекаПлюс\r\n\r\nЛайфхакер кофе с собой",
+		"countYandexMark": "4",
+		"encumbrances": "Нет",
+		"countEncumbrances": "0"
+	},
+	{
+		"cadastralNumber": "01:02:1000076:139",
+		"jurisdiction": "ФГБУ \"Россельхозцентр\"",
+		"type": "Здание",
+		"addressSource": "Респ. Адыгея, Кошехабльский р-н, аул Кошехабль, ул. Промышленная, д. 55",
+		"addressNormalized": "Промышленная ул., 55, аул Кошехабль",
+		"yandexMark": "Продукты",
+		"countYandexMark": "1",
+		"encumbrances": "Нет",
+		"countEncumbrances": "0"
+	},
+	{
+		"cadastralNumber": "01:03:1100001:217",
+		"jurisdiction": "ФГБУ \"Россельхозцентр\"",
+		"type": "Здание",
+		"addressSource": "Респ. Адыгея, Красногвардейский р-н, с. Красногвардейское, ул. Первомайская, д. 20",
+		"addressNormalized": "Первомайская ул., 20, село Красногвардейское",
+		"yandexMark": "Красногвардейский молочный завод\r\n\r\nМоя Станица\r\n\r\nРоссельхозбанк",
+		"countYandexMark": "3",
+		"encumbrances": "Нет",
+		"countEncumbrances": "0"
+	},
+	{
+		"cadastralNumber": "01:03:1100024:331",
+		"jurisdiction": "ФГБУ \"Россельхозцентр\"",
+		"type": "Здание",
+		"addressSource": "Респ. Адыгея, Красногвардейский р-н., с. Красногвардейское, ул. Первомайская, д. 20",
+		"addressNormalized": "Первомайская ул., 20, село Красногвардейское",
+		"yandexMark": "Красногвардейский молочный завод\r\n\r\nМоя Станица\r\n\r\nРоссельхозбанк",
+		"countYandexMark": "3",
+		"encumbrances": "Нет",
+		"countEncumbrances": "0"
+	},
+	{
+		"cadastralNumber": "01:05:2300040:35",
+		"jurisdiction": "ФГБУ \"Россельхозцентр\"",
+		"type": "Здание",
+		"addressSource": "Респ. Адыгея, Тахтамукайский р-н, аул Тахтамукай, ул. Совмена, д. 12",
+		"addressNormalized": "",
+		"yandexMark": "",
+		"countYandexMark": "0",
+		"encumbrances": "Нет",
+		"countEncumbrances": "0"
+	}
+]

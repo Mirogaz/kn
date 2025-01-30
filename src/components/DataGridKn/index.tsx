@@ -1,20 +1,48 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef, GridRowsProp, GridToolbar } from "@mui/x-data-grid";
 import { Kn } from "@/models/Kn";
-import knJson from "@/csvjson.json";
-import { Box, Link, List, ListItem, ListItemText, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { Box, Button, Tab, Tabs, TextField, Typography } from "@mui/material";
 import { ruRU } from "@mui/x-data-grid/locales";
+import axios from "axios";
+import Reference from "@components/Reference";
 
 export default function DataGridKn() {
-	const [data, setData] = useState<Kn[]>(knJson);
+	const [data, setData] = useState<Kn[]>([]);
+	const [file, setFiles] = useState<string[]>([]);
+	const [fileNameSelected, setFileNameSelected] = useState<{
+		index: number;
+		name: string;
+	}>();
 	const [tabIndex, setTabIndex] = useState(0);
 	const [searchQuery, setSearchQuery] = useState("");
+
+	useEffect(() => {
+		const fetchFiles = async () => {
+			try {
+				const response = await axios.get("/api/json-file");
+				setFiles(response.data.files);
+			} catch (error) {
+				console.error("Error fetching files:", error);
+			}
+		};
+
+		fetchFiles();
+	}, []);
 
 	const handleTabChange = (event: React.SyntheticEvent, newIndex: number) => {
 		setTabIndex(newIndex);
 		setSearchQuery("");
+	};
+
+	const selectedFile = async (fileName: string, index: number) => {
+		setFileNameSelected({
+			index: index,
+			name: fileName,
+		});
+		const { data } = await axios.get(`/api/file/${fileName}`);
+		setData(JSON.parse(data.content));
 	};
 
 	const filteredData = data.filter((row) => {
@@ -82,6 +110,32 @@ export default function DataGridKn() {
 				</Tabs>
 			</Box>
 
+			{tabIndex !== 2 && (
+				<Box sx={{ p: 2 }}>
+					<Typography variant="h6" gutterBottom>
+						Files in json directory
+					</Typography>
+					<Typography variant="body1" gutterBottom>
+						Всего файлов: {file.length}
+					</Typography>
+					<Typography variant="body1" gutterBottom>
+						Выбранный файл: {fileNameSelected?.name || "-"}
+					</Typography>
+					<Box sx={{ gap: 2, display: "flex" }}>
+						{file.map((name, index) => (
+							<Button
+								key={index}
+								variant="contained"
+								disabled={index === fileNameSelected?.index}
+								onClick={() => selectedFile(name, index)}
+							>
+								{name}
+							</Button>
+						))}
+					</Box>
+				</Box>
+			)}
+
 			{tabIndex === 0 && (
 				<div style={{ padding: 20, textAlign: "center" }}>
 					<TextField
@@ -134,7 +188,6 @@ export default function DataGridKn() {
 					)}
 				</div>
 			)}
-
 			{tabIndex === 1 && (
 				<>
 					<DataGrid
@@ -160,45 +213,7 @@ export default function DataGridKn() {
 					/>
 				</>
 			)}
-
-			{tabIndex === 2 && (
-				<Box sx={{ backgroundColor: "#f9f9f9", border: "1px solid #ddd", borderRadius: 2, p: 2, mt: 2 }}>
-					<Typography variant="h6" gutterBottom>
-						Экспорт файлов происходит в формате CSV. Инструкция по открытию:
-					</Typography>
-					<List>
-						<ListItem>
-							<ListItemText primary="1. Открыть или создать новый файл в Excel, в меню выбрать Data - Get Data" />
-						</ListItem>
-						<ListItem>
-							<ListItemText primary="2. В разделе Get Data выбрать From Text" />
-						</ListItem>
-						<ListItem>
-							<ListItemText primary="3. Выбрать файл, который нужно открыть в Excel, и нажать Get Data" />
-						</ListItem>
-						<ListItem>
-							<ListItemText primary="4. На этом шаге выбрать Delimited и File origin: Unicode (UTF-8), затем нажать Next" />
-						</ListItem>
-						<ListItem>
-							<ListItemText primary="5. На втором шаге отметить Comma и нажать Next" />
-						</ListItem>
-						<ListItem>
-							<ListItemText primary="6. Выбрать желаемый формат данных и нажать Finish" />
-						</ListItem>
-					</List>
-					<Typography variant="body1">
-						или перейдите в&nbsp;
-						<Link
-							href="https://workspace.google.com/products/sheets/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Google Sheets
-						</Link>
-						&nbsp; и загрузите файл
-					</Typography>
-				</Box>
-			)}
+			{tabIndex === 2 && <Reference />}
 		</div>
 	);
 }

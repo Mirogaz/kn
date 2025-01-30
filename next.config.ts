@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
 		@use "_variables" as *
 		@use "_mixins" as *`,
 	},
+	pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
 };
 
 export default nextConfig;
