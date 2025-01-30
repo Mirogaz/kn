@@ -113,7 +113,7 @@ export default function DataGridKn() {
 			{tabIndex !== 2 && (
 				<Box sx={{ p: 2 }}>
 					<Typography variant="h6" gutterBottom>
-						Files in json directory
+						Доступные файлы: 
 					</Typography>
 					<Typography variant="body1" gutterBottom>
 						Всего файлов: {file.length}

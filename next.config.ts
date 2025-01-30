@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
 		@use "_mixins" as *`,
 	},
 	pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
+	distDir: "build",
+	output: "export",
 };
 
 export default nextConfig;
